@@ -1,0 +1,121 @@
+body
+{
+	background-image: url("https://www.wbcsd.org/var/site/storage/images/media/images/chemicals_overview_img/23777-1-eng-GB/chemicals_overview_img_i1140.jpg");
+}
+#tableau
+{
+	width: 100%;
+	min-width: 720px;
+	display: flex;
+	flex-direction: column;
+}
+#s70
+{
+	height: 70%;
+	min-height: 450px;
+}
+#s20
+{
+	height: 20%;
+	min-height: 100px;
+}
+.ligne
+{
+	width: 100%;
+	height: 10%;
+	min-height: 50px;
+	display: flex;
+}
+.elm, .elm_right, .elm_bottom, .elm_right_bottom, .elm_empty_left, .elm_empty
+{
+	width: 5.5%;
+	min-width: 40px;
+	height: 100%;
+	border-top: 1px black solid;
+	border-left: 1px black solid;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.elm_right
+{
+	border-right: 1px black solid;
+}
+.elm_bottom
+{
+	border-bottom: 1px black solid;
+}
+.elm_right_bottom
+{
+	border: 1px black solid;
+}
+.elm_empty_left
+{
+	border: none;
+	margin-top: 1px;
+}
+.elm_empty
+{
+	border: none;
+	margin-top: 1px;
+	margin-left: 1px;
+}
+.atom_name
+{
+	font-size: 3vmin;
+}
+.atom_mass
+{
+	text-align: right;
+	font-size: 1.8vmin;
+}
+.atom_num
+{
+	text-align: left;
+	font-size: 1.8vmin;
+}
+.inconnus
+{
+	background-color: #C6C6C6;
+}
+.gaz_noble
+{
+	background-color: #4F8FEE;
+}
+.halogene
+{
+	background-color: #E84FEE;
+}
+.metalloide
+{
+	background-color: #00950A;
+}
+.lanthanides
+{
+	background-color: #B1F60F;
+}
+.actinides
+{
+	background-color: #0EF51D;
+}
+.metaux_trans
+{
+	background-color: #4CD255;
+}
+.metaux_autre
+{
+	background-color: #89FF90;
+}
+.metaux_alcalins_terreux
+{
+	background-color: #FCCA98;
+}
+.metaux_alcalins
+{
+	background-color: #FFB05F;
+}
+.non_metaux
+{
+	background-color: #A948EB;
+}
