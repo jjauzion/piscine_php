@@ -87,6 +87,13 @@ else if ($opp == "/")
 	echo $v1 / $v2."\n";
 }
 else if ($opp == "%")
+{
+	if ($v2 == 0)
+	{
+		echo "Divsion par 0 interdite\n";
+		exit;
+	}
 	echo $v1 % $v2."\n";
+}
 
 ?>
