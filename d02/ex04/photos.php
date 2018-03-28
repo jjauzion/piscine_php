@@ -3,9 +3,12 @@
 
 $c = curl_init("http://www.42.fr");
 $str = curl_exec($c);
+curl_close($c);
 
-preg_match('/(?<=<img).*(?<=src=")(.*)(?=").*(?=>)/', $str, $matches);
+preg_match('/DOCTYPE/Usi', $str, $matches);
 
-print_r($matches[1]);
+echo "------------\nFIN\n__________________\n";
+echo "$str\n";
+print_r($matches);
 
 ?>

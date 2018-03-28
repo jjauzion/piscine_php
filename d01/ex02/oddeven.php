@@ -7,7 +7,7 @@ while ($ret = !feof(STDIN))
 	$line = trim(fgets(STDIN));
 	if (is_numeric($line))
 	{
-		$nb = abs($line) % 2;
+		$nb = abs(substr($line, -1)) % 2;
 		if ($nb == 0)
 			echo "Le chiffre $line est Pair\n";
 		else
