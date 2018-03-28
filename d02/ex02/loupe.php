@@ -16,6 +16,6 @@ if ($argc <= 1)
 	exit;
 if (($str = file_get_contents($argv[1])) === FALSE)
 	exit;
-$str = preg_replace_callback('/(?<=<a href).*(?=\/a>)/sUi', "handle_lvl1", $str);
+$str = preg_replace_callback('/(?<=<a).*(?=\/a>)/sUi', "handle_lvl1", $str);
 echo "$str";
 ?>
