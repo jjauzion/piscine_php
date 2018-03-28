@@ -8,7 +8,7 @@ function handle_lvl2($matches)
 
 function handle_lvl1($matches)
 {
-	$str = preg_replace_callback('/(?<=title=").*"|(?<=>).*(?=<)/sUi', "handle_lvl2", $matches[0]);
+	$str = preg_replace_callback('/(?<=title=")(.*)"|>(.*)</sUi', "handle_lvl2", $matches[0]);
 	return $str;
 }
 
