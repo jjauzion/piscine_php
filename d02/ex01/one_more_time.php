@@ -61,7 +61,7 @@ if ($str[2] === FALSE || ft_check_bad_day($str[0]))
 	exit;
 }
 
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/Paris');
 
 $time = $str[1]." ".$str[2]." ".$str[3]." ".$str[4];
 if (($time = strtotime($time)) !== FALSE)
