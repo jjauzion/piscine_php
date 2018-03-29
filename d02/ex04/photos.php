@@ -47,6 +47,8 @@ preg_match_all('/(?<=<img).*(?<=src=")(.*)(?=").*(?=>)/Usi', $str, $matches);
 
 foreach($matches[1] as $key => $img)
 {
+	if (empty ($img))
+		continue;
 	/* Replace white space with %20 */
 	$img = preg_replace('/ +/', '%20', $img);
 
@@ -55,7 +57,7 @@ foreach($matches[1] as $key => $img)
 		$img_url = $img;
 	else if (preg_match('/^\/\//', $img))
 		$img_url = "https:".$img;
-	else if (preg_match('/^\/static/', $img))
+	else if (preg_match('/^\//', $img))
 	{
 		$tmp = preg_split('/\/{1}/', substr($argv[1], 0, -1));
 		if ($tmp[0] == "https:" || $tmp[0] == "http:")
@@ -80,9 +82,8 @@ foreach($matches[1] as $key => $img)
 	/* write image with the correct file name */
 	$file_name = preg_split('/\//', $img, -1, PREG_SPLIT_NO_EMPTY);
 	$file_name = $file_name[count($file_name) - 1];
-	if(file_exists($dir_name.$file_name)){
+	if(file_exists($dir_name.$file_name))
 		unlink($dir_name.$file_name);
-	}
 	$fp = fopen($dir_name.$file_name, 'x');
 	fwrite($fp, $raw_img);
 	fclose($fp);
