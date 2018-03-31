@@ -1,0 +1,13 @@
+docker run -d -p 8100:80 \
+  -v $HOME/http/MyWebSite/d03/:/var/www/html \
+     akeneo/apache-php
+
+-----------------------------------------------------
+
+brew install docker docker-machine
+mkdir $HOME/goinfre/.docker
+ln -s $HOME/goinfre/.docker $HOME/.docker
+docker-machine create --driver virtualbox Char
+eval "$(docker-machine env Char)"
+docker run -d --restart on-failure -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=rush00 --name stock mysql
+docker run -p 8100:80 --link stock:mysql -v $HOME/http/MyWebSite:/var/www/html --name lamp fauria/lamp
