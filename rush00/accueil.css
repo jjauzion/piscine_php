@@ -1,0 +1,36 @@
+h2 {
+	margin: auto;
+}
+
+#accueil {
+	background-color: BLUE;
+	color: WHITE;
+}
+
+.top_sell {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color: BLUE;
+}
+
+.sell {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.descriptif {
+	text-align: justify;
+	margin: 0 auto;
+	width: 40vw;
+}
+
+.pictures {
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-right: 10px;
+	height: 500px;
+	width: auto;
+}

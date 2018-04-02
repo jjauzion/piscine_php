@@ -1,5 +1,5 @@
 <?PHP
-
+session_start();
 if (!isset($_POST['submit']) || $_POST['submit'] != "OK")
 {
 	echo "ERROR\n";
@@ -28,12 +28,12 @@ if (!file_exists($file_path))
 	$error = 1;
 }
 
-if (isset($error) && $error = 1)
+if (isset($error) && $error == 1)
 {
 	?>
 	<!DOCTYPE html>
 	<html>
-		<meta http-equiv="refresh" content="1;URL=login_page.php" />
+		<meta http-equiv="refresh" content="1;URL=<?php echo $_SESSION['url'] ?>" />
 	</html>
 	<?PHP
 	$error = 0;
@@ -49,14 +49,13 @@ foreach ($table as $index => $user)
 		$passwd = hash('whirlpool', $_POST['passwd']);
 		if ($passwd == $user['passwd'])
 		{
-			session_start();
 			$_SESSION['login'] = $user['login'];
 			$_SESSION['id'] = $index;
 			$_SESSION['admin'] = $user['admin'];
 ?>
 <!DOCTYPE html>
 <html>
-	<meta http-equiv="refresh" content="0;URL=welcome.php" />
+	<meta http-equiv="refresh" content="0;URL=<?php echo $_SESSION['url'] ?>" />
 </html>
 <?PHP
 			exit;
@@ -67,7 +66,7 @@ foreach ($table as $index => $user)
 			?>
 			<!DOCTYPE html>
 			<html>
-				<meta http-equiv="refresh" content="1;URL=login_page.php" />
+				<meta http-equiv="refresh" content="1;URL=<?php echo $_SESSION['url'] ?>" />
 			</html>
 			<?PHP
 			exit;
@@ -78,5 +77,5 @@ echo "Wrong login\n";
 ?>
 <!DOCTYPE html>
 <html>
-	<meta http-equiv="refresh" content="1;URL=login_page.php" />
+	<meta http-equiv="refresh" content="1;URL=<?php echo $_SESSION['url'] ?>" />
 </html>

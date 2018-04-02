@@ -1,0 +1,41 @@
+#mon_compte {
+	background-color: RED;
+	color: WHITE;
+}
+
+a {
+	text-decoration: none;
+	text-align: center;
+	color: BLACK;
+}
+
+#trait:before, #trait:after {
+  content:'';
+  width:3em;
+  border-bottom:rgba(255,255,255,0.3) solid;
+  display:inline-block;
+  vertical-align:middle;
+}
+
+h4 {
+	color: BLACK;
+	text-align: left;
+}
+
+.commande {
+	background-color: WHITE;
+}
+
+.inscription_n_connexion {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	background-color: RED;
+}
+
+.inscription_o_connexion {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	background-color: RED;
+}

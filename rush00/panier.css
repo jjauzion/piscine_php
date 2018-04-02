@@ -1,0 +1,28 @@
+#panier {
+	background-color: GREEN;
+	color: WHITE;
+}
+
+h1:before, h1:after, h2:before, h2:after {
+  content:'';
+  width:3em;
+  border-bottom:rgba(255,255,255,0.3) solid;
+  display:inline-block;
+  vertical-align:middle;
+}
+
+.panier {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	background-color: GREEN;
+}
+
+.item {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	width: 500px;
+}

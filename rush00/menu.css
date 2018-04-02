@@ -1,0 +1,108 @@
+.div_home {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	background-color: WHITE;
+	height: 64px;
+	min-width: 1918px;
+}
+
+.level2 {
+	display: none;
+}
+
+.home_button {
+	text-decoration: none;
+	font-family: Arial;
+	font-size: 29px;
+	color: BLACK;
+	margin: auto;
+	padding: 16px 9vw 16px 9vw;
+}
+
+.categorie_button {
+	text-decoration: none;
+	font-family: Arial;
+	font-size: 25px;
+	color: WHITE;
+	padding-left: 8.5vw;
+	padding-right: 9.45vw;
+}
+
+h1, h2, h3, h4 {
+	text-align: center;
+	color: WHITE;
+}
+
+#accueil:hover {
+	background-color: BLUE;
+	color: WHITE;
+}
+
+#panier:hover {
+	background-color: GREEN;
+	color: WHITE;
+}
+
+#mon_compte:hover {
+	background-color: RED;
+	color: WHITE;
+}
+
+#categorie:hover {
+	background-color: BROWN;
+	color: WHITE;
+}
+
+.categorie {
+	list-style: none;
+}
+
+li:hover #categorie {
+	background-color: BROWN;
+	color: WHITE;
+}
+
+li:hover ul.level2 {
+	position: absolute;
+	padding-top: 10px;
+	z-index: 4;
+	display: block;
+	background-color: BROWN;
+}
+
+.categorie li ul li {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+/*
+#categorie:hover, .categorie_button:hover {
+
+}
+#categorie, .categorie_button {
+	margin:0;
+	padding: 16px 9vw 16px 9vw;
+	list-style-type:none;
+	text-align:center;
+}
+
+.categorie li ul li {
+	margin-top: 5px;
+}
+
+.categorie_button {
+	margin-top: 64px;
+	text-decoration: none;
+	font-family: Arial;
+	font-size: 23px;
+	color: WHITE;
+}
+
+h1:before, h1:after {
+  content:'';
+  width:3em;
+  border-bottom:rgba(255,255,255,0.3) solid;
+  display:inline-block;
+  vertical-align:middle;
+}
+*/

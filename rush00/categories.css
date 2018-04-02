@@ -1,0 +1,39 @@
+#categorie {
+	background-color: BROWN;
+	color: WHITE;
+}
+
+.categorie_sell {
+min-width: 1918px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color: BROWN;
+}
+
+.sell {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-left: 200px;
+}
+
+.descriptif {
+	text-align: justify;
+	width: 40vw;
+}
+
+h1:before, h1:after {
+  content:'';
+  width:3em;
+  border-bottom:rgba(255,255,255,0.3) solid;
+  display:inline-block;
+  vertical-align:middle;
+}
+
+.pictures {
+	margin-right: 10px;
+	height: 500px;
+	width: auto;
+}

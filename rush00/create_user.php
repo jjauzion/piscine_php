@@ -1,5 +1,5 @@
 <?PHP
-
+session_start();
 if (!isset($_POST['submit']) || $_POST['submit'] != "OK")
 {
 	echo "ERROR\n";
@@ -18,12 +18,12 @@ if (!isset($_POST['passwd']) || $_POST['passwd'] == "")
 	$error = 1;
 }
 
-if (isset($error) && $error = 1)
+if (isset($error) && $error == 1)
 {
 ?>
 <!DOCTYPE html>
 <html>
-	<meta http-equiv="refresh" content="1;URL=create_user.html" />
+	<meta http-equiv="refresh" content="1;URL=<?php echo $_SESSION['url'] ?>" />
 </html>
 <?PHP
 	$error = 0;
@@ -49,7 +49,7 @@ if (file_exists($file_path))
 ?>
 <!DOCTYPE html>
 <html>
-	<meta http-equiv="refresh" content="1;URL=create_user.html" />
+	<meta http-equiv="refresh" content="1;URL=<?php echo $_SESSION['url'] ?>" />
 </html>
 <?PHP
 			exit;
@@ -62,9 +62,23 @@ $user_data['admin'] = $_POST['admin'];
 $table[] = $user_data;
 file_put_contents($file_path, serialize($table));
 echo "User created<br />";
+$file_data = file_get_contents($file_path);
+$table = unserialize($file_data);
+foreach ($table as $index => $user)
+{
+	if ($_POST['login'] == $user['login'])
+	{
+		$passwd = hash('whirlpool', $_POST['passwd']);
+		if ($passwd == $user['passwd'])
+		{
+			$_SESSION['login'] = $user['login'];
+			$_SESSION['id'] = $index;
+			$_SESSION['admin'] = $user['admin'];
+		}
+	}
+}
 ?>
 <!DOCTYPE html>
 <html>
-	<meta http-equiv="refresh" content="1;URL=welcome.php" />
+	<meta http-equiv="refresh" content="1;URL=<?php echo $_SESSION['url'] ?>" />
 </html>
-<?PHP

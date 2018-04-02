@@ -9,13 +9,13 @@ if (isset($_SESSION['id']))
 <!DOCTYPE html>
 <html>
 	<p>Bye !</p>
-	<meta http-equiv="refresh" content="1;URL=welcome.php" />
+	<meta http-equiv="refresh" content="1;URL=accueil.php" />
 </html>
 <?PHP
+	exit;
 }
 ?>
 <!DOCTYPE html>
 <html>
-	<meta http-equiv="refresh" content="0;URL=welcome.php" />
+	<meta http-equiv="refresh" content="0;URL=accueil.php" />
 </html>
-
