@@ -11,3 +11,22 @@ docker-machine create --driver virtualbox Char
 eval "$(docker-machine env Char)"
 docker run -d --restart on-failure -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=rush00 --name stock mysql
 docker run -p 8100:80 --link stock:mysql -v $HOME/http/MyWebSite:/var/www/html --name lamp fauria/lamp
+
+docker run  -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=42 -d mysql:latest
+docker exec -it mysql mysql -uroot -p"42"
+
+docker container ls -a
+docker start 7bf4c40f7ef5122cc5be08ed2df0fd276e238546df610f92c673f69f01da6bd2 (id)
+
+-----------------------------------------------------------
+
+export MACHINE_STORAGE_PATH=/Volumes/Storage/goinfre/qchantel
+docker-machine create -d virtualbox piscine
+eval $(docker-machine env piscine)
+docker pull mysql/mysql-server:latest
+docker run -v $HOME/http/MyWebSite/day05:$HOME/day05 -e MYSQL_DATABASE=db_qchantel -e MYSQL_ROOT_PASSWORD="root" --name=mysql1 -d mysql/mysql-server:latest
+#docker exec -it mysql1 mysql -uroot -proot
+#use db_qchantel;
+#source /Users/qchantel/day05/ressources/base_student.sql
+
+
