@@ -1,0 +1,20 @@
+<- Vertex ----------------------------------------------------------------------
+The Vertex class contains vertex attributes:
+- x: x vertex coordinate -> mandatory for vertex definition;
+- y: y vertex coordinate -> mandatory for vertex definition;
+- z: z vertex coordinate -> mandatory for vertex definition;
+- w: w homogenous vertex coordinate (set to 1 if not define)
+- color : color associated to the vertex (set to white if not defined);
+	Note: the color must be a Color class (see color class doc for details)
+
+An instance can be contructed from as follow:
+new Vertex( array( 'x' => 1, 'y' => 3.0, 'z' => 4.2 ) );
+OR
+new Vertex( array( 'x' => 1, 'y' => 3.0, 'z' => 4.2, 'w' => 1, 'color' = color ) );
+
+The class provides set and get accessor for all 5 attributes:
+$myvertex->getX();
+$myvertex->setX($value);
+	Note replace X by any of the 5 paramters with the first letter in top case;
+
+---------------------------------------------------------------------- Vertex ->
