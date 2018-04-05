@@ -45,15 +45,18 @@ abstract class weapon {
 
 	function __construct (array $kwargs) {
 		try {
-			if (!$this->array_keys_exists(array('name', 'ammo', 'short_range', 'middle_range', 'far_range', 'is_static'), $kwargs))
+			if (!($this->array_keys_exists(
+				array('name', 'ammo', 'short_range',
+				'middle_range', 'far_range', 'is_static'),
+				$kwargs)))
 				throw new Exception('Weapon definition incomplete', 10);
 		}
-		$this->init_weapon($kwargs);
 		catch (Exception $exc) {
-			echo "Error $exc->getCode() in $exc->getFile() on line $exc->getLine()\n";
+			echo "Error ".$exc->getCode()." in ".$exc->getFile()." on line ".$exc->getLine()."\n";
 			echo $exc->getMessage()."\n";
 			echo $exc."\n";
 		}
+		$this->init_weapon($kwargs);
 		return;
 	}
 

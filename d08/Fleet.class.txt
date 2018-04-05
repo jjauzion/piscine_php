@@ -2,24 +2,24 @@
 
 require_once "TLibft.class.php";
 
-abstract class Starship {
+abstract class Fleet {
 
 	use TLibft;
 
-	private	$_name;
-	private	$_image;
-	private	$_size = array ('x' => 0, 'y' => 0);
-	private	$_hull;
-	private	$_power;
-	private	$_speed;
-	private	$_agility;
-	private	$_shield;
-	private	$_weapons;
+	private $_active;
+	private $_center_position = array ( 'x' => 0, 'y' => 0);
+	private $_relative_corner_coord = array (
+		'x0' => 0, 'y0' => 0,
+		'x1' => 0, 'y1' => 0,
+		'x2' => 0, 'y2' => 0,
+		'x3' => 0, 'y3' => 0);
+	private $_direction = array ( 'x' => 0, 'y' => 0);
+	private $_inertia;
 
 	public static $verbose = FALSE;
 
 	public static function doc () {
-		return file_get_contents(dirname(__FILE__)."/starship.class.txt");
+		return file_get_contents(dirname(__FILE__)."/Fleet.class.txt");
 	}
 
 	function __toString () {

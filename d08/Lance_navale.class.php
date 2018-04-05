@@ -1,14 +1,16 @@
 <?PHP
 
-class Lance_navale {
+require_once "Weapon.class.php";
+
+class Lance_navale extends Weapon {
 
 	use TLibft;
 
-	public function aoe() {
+	public function aoe($impact_coord) {
 		return ($impact_coord);
 	}
 
-	public function coverage () {
+	public function coverage ($anchor, $shoot_dir) {
 		if ($this->_shooting_points == NULL)
 		{
 			echo "weapon must be mounted before knowing the coverage area\n";
@@ -17,7 +19,20 @@ class Lance_navale {
 		$i = 0;
 		while (++$i <= $this->getFar_range)
 		{
-			$coverage[$i] = $this->getShooting_points() + $i;
+			if ($shoot_dir['x'] != 0)
+			{
+				$coverage['x'][$i] = $this->getShooting_points()['x']
+				+ $anchor['x'] + $i * $shoot_dir['x'];
+				$coverage['y'][$i] = $this->getShooting_points()['y']
+				+ $anchor['y'];
+			}
+			if ($shoot_dir['y'] != 0)
+			{
+				$coverage['y'][$i] = $this->getShooting_points()['y']
+				+ $anchor['y'] + $i * $shoot_dir['y'];
+				$coverage['x'][$i] = $this->getShooting_points()['x'];
+				+ $anchor['x'];
+			}
 		}
 		return ($coverage);
 	}
@@ -44,14 +59,14 @@ class Lance_navale {
 		return;
 	}
 
-	function __construct ($kwargs) {
+	function __construct () {
 		$weapon = array (
-			'name' = "lance_navale",
-			'ammo' = 0,
-			'short_range' = 30,
-			'middle_range' = 60,
-			'far_range' = 90,
-			'is_static' = 0);
+			'name' => "Lance_navale",
+			'ammo' => 0,
+			'short_range' => 30,
+			'middle_range' => 60,
+			'far_range' => 90,
+			'is_static' => 0);
 		parent::__construct($weapon);
 		return;
 	}

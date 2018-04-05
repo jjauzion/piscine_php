@@ -1,5 +1,7 @@
 <?PHP
 
+require_once "Starship.class.php";
+
 class Cuirasse_imperial extends Starship {
 
 	public static $verbose = FALSE;
@@ -13,8 +15,8 @@ class Cuirasse_imperial extends Starship {
 		return;
 	}
 
-	function __construct () {
-		$ship['name'] = "cuirasse_imperial";
+	function __construct (array $kwargs) {
+		$ship['name'] = "Cuirasse_imperial";
 		$ship['image'] = "resources/cuirasse_imperial.png";
 		$ship['size'] = array ('x' => 2, 'y' => 7);
 		$ship['hull'] = 8;
@@ -22,7 +24,15 @@ class Cuirasse_imperial extends Starship {
 		$ship['speed'] = 10;
 		$ship['agility'] = 5;
 		$ship['shield'] = 2;
-		$ship['weapons'] = th;
+		foreach ($kwargs as $weapon)
+		{
+			if (!is_a($weapon, "Lance_navale") || count($kwargs) != 2) {
+				echo "Error : Cuirassé imperial requires 2 Lance navale\n";
+				return;
+			}
+			$ship['weapons'][] = $weapon;
+		}
+		parent::__construct($ship);
 		return;
 	}
 
@@ -33,4 +43,3 @@ class Cuirasse_imperial extends Starship {
 }
 
 ?>
-

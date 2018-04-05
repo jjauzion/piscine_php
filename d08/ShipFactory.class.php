@@ -2,7 +2,7 @@
 
 class ShipFactory extends Factory {
 
-	public function absorb($ship) {
+	public function absorb_pattern($ship) {
 		if (is_a($ship, "Starship"))
 		{
 			if (!array_key_exists($ship->getName(), $this->_item_type))

@@ -10,10 +10,13 @@ trait TLibft {
 	}
 
 	function array_keys_exists(array $keys, array $arr) {
-		   return !array_diff_key(array_flip($keys), $arr);
+		$test = array_diff_key(array_flip($keys), $arr);
+		if (empty($test))
+			return (1);
+		else
+			return (0);
 	}
 
 }
 
 ?>
-

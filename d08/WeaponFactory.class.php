@@ -2,7 +2,7 @@
 
 class WeaponFactory extends Factory {
 
-	public function absorb($weapon) {
+	public function absorb_pattern($weapon) {
 		if (is_a($weapon, "Weapon"))
 		{
 			if (!array_key_exists($weapon->getName(), $this->_item_type))
