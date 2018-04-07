@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<style>
+
+#balloon {
+	width: 200px;
+	height: 200px;
+	border-radius: 200px;
+	margin: auto;
+	background-color: red;
+}
+
+#balloon:hover {
+	cursor: pointer;
+}
+		</style>
+		<title>BOOM BOOM balloon</title>
+		<script src="https://code.jquery.com/jquery-3.3.1.js" 
+		  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" 
+		  crossorigin="anonymous"></script>
+		  <script>
+
+$(document).ready(balloon);
+
+var counter = 0;
+var count = function count(val) {
+	counter = counter + val;
+	if (counter > 2)
+		counter = 0;
+	else if (counter < 0)
+		counter = 2;
+	return (counter);
+}
+
+function getColor(i) {
+	if (i == 0)
+		return ("red");
+	else if (i == 1)
+		return ("green");
+	else if (i == 2)
+		return ("blue");
+}
+
+function pump () {
+	var width = $('#balloon').width() + 10;
+	var height = $('#balloon').height() + 10;
+	if (width > 420)
+	{
+		width = 200;
+		height = 200;
+	}
+	$('#balloon').width(width);
+	$('#balloon').height(height);
+	var cpt = count(1);
+	$('#balloon').css('background-color', getColor(cpt));
+}
+
+function blow () {
+	var width = $('#balloon').width() - 5;
+	var height = $('#balloon').height() - 5;
+	if (width < 200)
+	{
+		width = 200;
+		height = 200;
+	}
+	$('#balloon').width(width);
+	$('#balloon').height(height);
+	var cpt = count(-1);
+	$('#balloon').css('background-color', getColor(cpt));
+}
+
+function balloon () {
+	$('#balloon').click(pump);
+	$('#balloon').mouseout(blow);
+}
+		  </script>
+	</head>
+	<body>
+		<div id="balloon"></div>
+	</body>
+</html>
+
