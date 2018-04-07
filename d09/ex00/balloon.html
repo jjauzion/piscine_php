@@ -8,7 +8,7 @@
 	width: 200px;
 	height: 200px;
 	background-color: red;
-	border-radius: 200px;
+	border-radius: 100px;
 	margin: auto;
 }
 
@@ -29,7 +29,7 @@ function pump() {
 	}
 	balloon.style.width = width.toString().concat(str);
 	balloon.style.height = height.toString().concat(str);
-	balloon.style.borderRadius = height.toString().concat(str);
+	balloon.style.borderRadius = (height / 2).toString().concat(str);
 	if (balloon.style.backgroundColor == "red" || balloon.style.backgroundColor == "")
 		balloon.style.backgroundColor = "green"; 
 	else if (balloon.style.backgroundColor == "green")
@@ -49,7 +49,7 @@ function blow() {
 	}
 	balloon.style.width = width.toString().concat(str);
 	balloon.style.height = height.toString().concat(str);
-	balloon.style.borderRadius = height.toString().concat(str);
+	balloon.style.borderRadius = (height / 2).toString().concat(str);
 	if (balloon.style.backgroundColor == "red" || balloon.style.backgroundColor == "")
 		balloon.style.backgroundColor = "blue"; 
 	else if (balloon.style.backgroundColor == "blue")

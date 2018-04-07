@@ -7,7 +7,7 @@
 #balloon {
 	width: 200px;
 	height: 200px;
-	border-radius: 200px;
+	border-radius: 100px;
 	margin: auto;
 	background-color: red;
 }
@@ -55,6 +55,7 @@ function pump () {
 	$('#balloon').height(height);
 	var cpt = count(1);
 	$('#balloon').css('background-color', getColor(cpt));
+	$('#balloon').css('border-radius', width / 2);
 }
 
 function blow () {
@@ -69,6 +70,7 @@ function blow () {
 	$('#balloon').height(height);
 	var cpt = count(-1);
 	$('#balloon').css('background-color', getColor(cpt));
+	$('#balloon').css('border-radius', width / 2);
 }
 
 function balloon () {
