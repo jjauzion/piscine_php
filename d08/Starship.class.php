@@ -15,6 +15,10 @@ abstract class Starship {
 	private	$_agility;
 	private	$_shield;
 	private	$_weapons;
+	private	$_box;
+	private	$_active;
+	private	$_center_position;
+	private	$_inertia;
 
 	public static $verbose = FALSE;
 
@@ -24,6 +28,17 @@ abstract class Starship {
 
 	function __toString () {
 		return;
+	}
+
+	private function initialize_hit_box() {
+		for ($x = 0; $x < $this->getSize()['x']; $x++)
+		{
+			for ($y = 0; $y < $this->getSize()['y']; $y++)
+			{
+				$this->_box['x'][] = $x - $this->getCenter_position()['x'];
+				$this->_box['y'][] = $y - $this->getCenter_position()['y'];
+			}
+		}
 	}
 
 	private function initialize_ship($kwargs) {
@@ -37,8 +52,10 @@ abstract class Starship {
 		$this->_shield = $kwargs['shield'];
 		$this->_weapons = $kwargs['weapons'];
 		$this->_active = 0;
-		$this->_center_position['x'] = $this->_size['x'] / 2;
-		$this->_center_position['y'] = $this->_size['y'] / 2;
+		$this->_center_position['x'] = ceil($this->_size['x'] / 2);
+		$this->_center_position['y'] = ceil($this->_size['y'] / 2);
+		$this->_inertia = 0;
+		$this->initialize_hit_box();
 	}
 
 	public function getName() { return $this->_name; }
@@ -52,13 +69,17 @@ abstract class Starship {
 	public function getWeapons() { return $this->_weapons; }
 	public function getActive() { return $this->_active; }
 	public function getCenter_position() { return $this->_center_position; }
+	public function getInertia() { return $this->_iniertia; }
+	public function getBox() { return $this->_box; }
+
+	public function setInertia($val) { $this->_maneuver = $val; }
 
 	function __construct (array $kwargs) {
 		try {
 			if (!($this->array_keys_exists( 
-				array('name', 'image', 'size', 'hull', 'power',
-				'speed', 'agility', 'shield', 'weapons'), 
-				$kwargs)))
+							array('name', 'image', 'size', 'hull', 'power',
+								'speed', 'agility', 'shield', 'weapons'), 
+							$kwargs)))
 				throw new Exception('Starship definition incomplete', 1);
 			if (!array_key_exists('x', $kwargs['size']) || !array_key_exists('y', $kwargs['size'])) 
 				throw new Exception('Starship size must be an array with \'x\' and \'y\' keys', 2);
@@ -69,7 +90,7 @@ abstract class Starship {
 			echo $exc."\n";
 		}
 		$this->initialize_ship($kwargs);
-			
+
 		return;
 	}
 
