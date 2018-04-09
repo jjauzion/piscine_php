@@ -31,14 +31,15 @@ abstract class Starship {
 	}
 
 	private function initialize_hit_box() {
-		for ($x = 0; $x < $this->getSize()['x']; $x++)
+		for ($x = 1; $x <= $this->getSize()['x']; $x++)
 		{
 			for ($y = 0; $y < $this->getSize()['y']; $y++)
 			{
-				$this->_box['x'][] = $x - $this->getCenter_position()['x'];
-				$this->_box['y'][] = $y - $this->getCenter_position()['y'];
+				$this->_box[$x][$y] = 1;
 			}
 		}
+		$this->_box[0][0] = -$this->getCenter_position()['x'];
+		$this->_box[0][1] = -$this->getCenter_position()['y'];
 	}
 
 	private function initialize_ship($kwargs) {
