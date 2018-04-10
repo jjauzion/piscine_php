@@ -1,0 +1,85 @@
+<?PHP
+
+require_once "TLibft.class.php";
+
+abstract class Fleet {
+
+	use TLibft;
+
+	private $_active;
+	private $_center_position = array ( 'x' => 0, 'y' => 0);
+	private $_relative_corner_coord = array (
+		'x0' => 0, 'y0' => 0,
+		'x1' => 0, 'y1' => 0,
+		'x2' => 0, 'y2' => 0,
+		'x3' => 0, 'y3' => 0);
+	private $_direction = array ( 'x' => 0, 'y' => 0);
+	private $_inertia;
+
+	public static $verbose = FALSE;
+
+	public static function doc () {
+		return file_get_contents(dirname(__FILE__)."/Fleet.class.txt");
+	}
+
+	function __toString () {
+		return;
+	}
+
+	private function initialize_ship($kwargs) {
+		$this->_name = $kwargs['name'];
+		$this->_image = $kwargs['image'];
+		$this->_size = $kwargs['size'];
+		$this->_hull = $kwargs['hull'];
+		$this->_power = $kwargs['power'];
+		$this->_speed = $kwargs['speed'];
+		$this->_agility = $kwargs['agility'];
+		$this->_shield = $kwargs['shield'];
+		$this->_weapons = $kwargs['weapons'];
+		$this->_active = 0;
+		$this->_center_position['x'] = $this->_size['x'] / 2;
+		$this->_center_position['y'] = $this->_size['y'] / 2;
+	}
+
+	public function getName() { return $this->_name; }
+	public function getImage() { return $this->_image; }
+	public function getSize() { return $this->_size; }
+	public function getHull() { return $this->_hull; }
+	public function getPower() { return $this->_power; }
+	public function getSpeed() { return $this->_speed; }
+	public function getAgility() { return $this->_agility; }
+	public function getShield() { return $this->_shield; }
+	public function getWeapons() { return $this->_weapons; }
+	public function getActive() { return $this->_active; }
+	public function getCenter_position() { return $this->_center_position; }
+
+	function __construct (array $kwargs) {
+		try {
+			if (!($this->array_keys_exists( 
+				array('name', 'image', 'size', 'hull', 'power',
+				'speed', 'agility', 'shield', 'weapons'), 
+				$kwargs)))
+				throw new Exception('Starship definition incomplete', 1);
+			if (!array_key_exists('x', $kwargs['size']) || !array_key_exists('y', $kwargs['size'])) 
+				throw new Exception('Starship size must be an array with \'x\' and \'y\' keys', 2);
+		}
+		catch (Exception $exc) {
+			echo "Error ".$exc->getCode()." in ".$exc->getFile()." on line ".$exc->getLine()."\n";
+			echo $exc->getMessage()."\n";
+			echo $exc."\n";
+		}
+		$this->initialize_ship($kwargs);
+			
+		return;
+	}
+
+	function __destruct () {
+		return;
+	}
+
+	function __clone() {
+	}
+
+}
+
+?>
