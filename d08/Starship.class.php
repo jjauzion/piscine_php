@@ -6,6 +6,7 @@ abstract class Starship {
 
 	use TLibft;
 
+	private	$_id;
 	private	$_name;
 	private	$_image;
 	private	$_size = array ('x' => 0, 'y' => 0);
@@ -16,9 +17,11 @@ abstract class Starship {
 	private	$_shield;
 	private	$_weapons;
 	private	$_box;
+	private	$_anchor;
 	private	$_active;
 	private	$_center_position;
 	private	$_inertia;
+	private	$_direction;
 
 	public static $verbose = FALSE;
 
@@ -31,18 +34,22 @@ abstract class Starship {
 	}
 
 	private function initialize_hit_box() {
-		for ($x = 1; $x <= $this->getSize()['x']; $x++)
+		for ($x = 0; $x < $this->getSize()['x']; $x++)
 		{
 			for ($y = 0; $y < $this->getSize()['y']; $y++)
 			{
 				$this->_box[$x][$y] = 1;
 			}
 		}
-		$this->_box[0][0] = -$this->getCenter_position()['x'];
-		$this->_box[0][1] = -$this->getCenter_position()['y'];
+		$this->_anchor['x'] = -$this->getCenter_position()['x'];
+		$this->_anchor['y'] = -$this->getCenter_position()['y'];
 	}
 
 	private function initialize_ship($kwargs) {
+		if (isset($kwargs['id']))
+			$this->_id = $kwargs['id'];
+		else
+			$this->_id = -1;
 		$this->_name = $kwargs['name'];
 		$this->_image = $kwargs['image'];
 		$this->_size = $kwargs['size'];
@@ -57,8 +64,10 @@ abstract class Starship {
 		$this->_center_position['y'] = ceil($this->_size['y'] / 2);
 		$this->_inertia = 0;
 		$this->initialize_hit_box();
+		$this->_direction = array('x' => 0, 'y' => 0);
 	}
 
+	public function getId() { return $this->_id; }
 	public function getName() { return $this->_name; }
 	public function getImage() { return $this->_image; }
 	public function getSize() { return $this->_size; }
@@ -72,8 +81,19 @@ abstract class Starship {
 	public function getCenter_position() { return $this->_center_position; }
 	public function getInertia() { return $this->_iniertia; }
 	public function getBox() { return $this->_box; }
+	public function getAnchor() { return $this->_anchor; }
+	public function getDirection() { return $this->_direction; }
 
-	public function setInertia($val) { $this->_maneuver = $val; }
+	public function setId($val) { $this->_id = $val; }
+	public function setInertia($val) { $this->_inertia = $val; }
+	public function setCenter_position($x, $y) {
+		$this->_center_position['x'] = $x;
+		$this->_center_position['y'] = $y;
+	}
+	public function setDirection($x, $y) {
+		$this->_direction['x'] = $x;
+		$this->_direction['y'] = $y;
+	}
 
 	function __construct (array $kwargs) {
 		try {
@@ -91,7 +111,6 @@ abstract class Starship {
 			echo $exc."\n";
 		}
 		$this->initialize_ship($kwargs);
-
 		return;
 	}
 
@@ -101,7 +120,6 @@ abstract class Starship {
 
 	function __clone() {
 	}
-
 }
 
 ?>

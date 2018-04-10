@@ -33,6 +33,7 @@ class Cuirasse_imperial extends Starship {
 			$ship['weapons'][] = $weapon;
 		}
 		parent::__construct($ship);
+		$this->setDirection(0, 1);
 		return;
 	}
 
