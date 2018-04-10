@@ -41,18 +41,23 @@ class Map {
 			echo "Error : input data not conform, impossible to translate an object with that...\n";
 			return (1);
 		}
-		for ($x = 0; $x < count($obj->getBox()); $x++) {
-			for ($y = 0; $y <  count($obj->getBox()[$x]); $y++) {
-				$cx = $x + $obj->getAnchor()['x'] + $obj->getCenter_position()['x'];
-				$cy = $y + $obj->getAnchor()['y'] + $obj->getCenter_position()['y'];
-				if ($this->_map[$cx][$cy] == 0 || $this->_map[$cx][$cy] == $obj->getId())
+		for ($x = 0; $x < count($obj->getBox()['x']); $x++) {
+			for ($y = 0; $y <  count($obj->getBox()['y']); $y++) {
+				$cx = $obj->getBox()['x'][$x] + $obj->getCenter_position()['x'];
+				$cy = $obj->getBox()['y'][$y] + $obj->getCenter_position()['y'];
+				if ($this->_map[$cx][$cy] == $obj->getId())
 					$this->_map[$cx][$cy] = 0;
-				$cx = $x + $obj->getAnchor()['x'] + $dest['x'];
-				$cy = $y + $obj->getAnchor()['y'] + $dest['y'];
-				if ($this->_map[$cx][$cy] == 0 || $this->_map[$cx][$cy] == $obj->getId()) {
+				else if ($this->_map[$cx][$cy] == "$")
 					$this->_map[$cx][$cy] = $obj->getId();
-					$obj->getCenter_position['x'] = $dest['x'];
-					$obj->getCenter_position['y'] = $dest['y'];
+				$cx = $obj->getBox()['x'][$x] + $dest['x'];
+				$cy = $obj->getBox()['y'][$y] + $dest['y'];
+				if ($this->_map[$cx][$cy] == 0 || $this->_map[$cx][$cy] == $obj->getId()) {
+					if ($this->_map[$cx][$cy] == $obj->getId())
+						$this->_map[$cx][$cy] = "$";
+					else
+						$this->_map[$cx][$cy] = $obj->getId();
+					$obj->getCenter_position()['x'] = $dest['x'];
+					$obj->getCenter_position()['y'] = $dest['y'];
 				}
 				else {
 					echo "CRAAASHHHHHHHHHHHHH !!!\n";
@@ -76,20 +81,18 @@ class Map {
 	}
 
 	public function add_object($obj) {
-		if (!is_a($obj, "Starship") ||
-			(!$this->array_keys_exists(array('x', 'y'), $obj->getCenter_position())) || 
-			(!$this->array_keys_exists(array('x', 'y'), $obj->getAnchor())))
+		if (!is_a($obj, "Starship")) 
 		{
-			echo "(Object can't be added to map because of wrong object definition)\n";
+			echo "(Object must be of class Starship to be added to the map)\n";
 			return;
 		}
-		for ($x = 0; $x < count($obj->getBox()); $x++) {
-			for ($y = 0; $y <  count($obj->getBox()[$x]); $y++) {
-				$cx = $x + $obj->getAnchor()['x'] + $obj->getCenter_position()['x'];
-				$cy = $y + $obj->getAnchor()['y'] + $obj->getCenter_position()['y'];
-				if ($obj->getBox()[$x][$y] == 1) {
-					$this->_map[$cx][$cy] = $obj->getId();
-				}
+		print_r($obj->getBox());
+		print_r($obj->getCenter_position());
+		for ($x = 0; $x < count($obj->getBox()['x']); $x++) {
+			for ($y = 0; $y <  count($obj->getBox()['y']); $y++) {
+				$cx = $obj->getBox()['x'][$x] + $obj->getCenter_position()['x'];
+				$cy = $obj->getBox()['y'][$y] + $obj->getCenter_position()['y'];
+				$this->_map[$cx][$cy] = $obj->getId();
 			}
 		}
 		if (Map::$verbose === TRUE)

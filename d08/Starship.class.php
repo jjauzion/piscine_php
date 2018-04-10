@@ -38,7 +38,8 @@ abstract class Starship {
 		{
 			for ($y = 0; $y < $this->getSize()['y']; $y++)
 			{
-				$this->_box[$x][$y] = 1;
+				$this->_box['x'][] = $x - $this->getCenter_position()['x'];
+				$this->_box['y'][] = $y - $this->getCenter_position()['y'];
 			}
 		}
 		$this->_anchor['x'] = -$this->getCenter_position()['x'];

@@ -39,7 +39,7 @@ $map->add_object($cuirasse1, 2);
 $map->add_object($meteor1, 3);
 print( $map . PHP_EOL);
 
-$map->move_obj($cuirasse1, $map, ['x' => 10, 'y' => 16]);
+$map->move_obj($cuirasse1, $map, ['x' => 10, 'y' => 15]);
 print( $map . PHP_EOL);
 
 ?>
