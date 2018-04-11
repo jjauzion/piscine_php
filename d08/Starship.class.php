@@ -61,8 +61,8 @@ abstract class Starship {
 		$this->_shield = $kwargs['shield'];
 		$this->_weapons = $kwargs['weapons'];
 		$this->_active = 0;
-		$this->_center_position['x'] = ceil($this->_size['x'] / 2);
-		$this->_center_position['y'] = ceil($this->_size['y'] / 2);
+		$this->_center_position['x'] = ceil(($this->_size['x'] - 1) / 2);
+		$this->_center_position['y'] = ceil(($this->_size['y'] - 1) / 2);
 		$this->_inertia = 0;
 		$this->initialize_hit_box();
 		$this->_direction = array('x' => 0, 'y' => 0);
@@ -82,7 +82,6 @@ abstract class Starship {
 	public function getCenter_position() { return $this->_center_position; }
 	public function getInertia() { return $this->_iniertia; }
 	public function getBox() { return $this->_box; }
-	public function getAnchor() { return $this->_anchor; }
 	public function getDirection() { return $this->_direction; }
 
 	public function setId($val) { $this->_id = $val; }
@@ -94,6 +93,9 @@ abstract class Starship {
 	public function setDirection($x, $y) {
 		$this->_direction['x'] = $x;
 		$this->_direction['y'] = $y;
+	}
+	public function setBox($new_box) {
+		$this->_box = $new_box;
 	}
 
 	function __construct (array $kwargs) {

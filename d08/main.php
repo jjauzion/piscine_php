@@ -29,17 +29,43 @@ $cuirasse2 = $shipfacto->create('Cuirasse_imperial');
 $fleet1 = new Fleet("Imperial_fleet");
 $fleet1->add_ship($cuirasse1);
 $fleet1->add_ship($cuirasse2);
-
 $meteor1 = $shipfacto->create('Objects');
 
-$cuirasse1->setCenter_position(10, 10);
-$meteor1->setCenter_position(20, 23);
 $map = new Map(30, 30);
-$map->add_object($cuirasse1, 2);
+$meteor1->setCenter_position(9, 9);
 $map->add_object($meteor1, 3);
+
+$cuirasse2->setCenter_position(21, 7);
+$cuirasse2->setDirection(0, -1);
+$map->add_object($cuirasse2, 2);
+echo "direction ->";
+print_r($cuirasse2->getDirection());
+sleep(1);
+print( $map . PHP_EOL);
+$map->move_obj($cuirasse2, $map, ['x' => 21, 'y' => 15]);
+print( $map . PHP_EOL);
+return;
+
+$cuirasse1->setCenter_position(4, 4);
+$map->add_object($cuirasse1, 2);
 print( $map . PHP_EOL);
 
-$map->move_obj($cuirasse1, $map, ['x' => 10, 'y' => 15]);
+echo "center ->";
+print_r($cuirasse1->getCenter_position());
+echo "direction ->";
+print_r($cuirasse1->getDirection());
+$map->move_obj($cuirasse1, $map, ['x' => 19, 'y' => 22]);
 print( $map . PHP_EOL);
+echo "center ->";
+print_r($cuirasse1->getCenter_position());
+echo "direction ->";
+print_r($cuirasse1->getDirection());
 
+$map->move_obj($cuirasse1, $map, ['x' => 9, 'y' => 9]);
+print( $map . PHP_EOL);
+echo "center ->";
+print_r($cuirasse1->getCenter_position());
+echo "direction ->";
+print_r($cuirasse1->getDirection());
+ 
 ?>

@@ -10,7 +10,6 @@ class Map {
 	private $_map = array();
 	private $_size_x;
 	private $_size_y;
-	private $_object = array();
 
 	public static $verbose = FALSE;
 
@@ -20,9 +19,14 @@ class Map {
 
 	function __toString () {
 		$str = "";
-		for ($x = 0; $x < $this->_size_x; $x++) {
-			for ($y = 0; $y < $this->_size_y; $y++) {
-				$str = sprintf("%s%3s", $str, $this->_map[$x][$y]);
+		for ($x = -1; $x < $this->_size_x; $x++) {
+			for ($y = -1; $y < $this->_size_y; $y++) {
+				if ($x == -1)
+					$str = sprintf("%s%3s", $str, $y);
+				else if ($y == -1)
+					$str = sprintf("%s%3s", $str, $x);
+				else
+					$str = sprintf("%s%3s", $str, $this->_map[$x][$y]);
 			}
 			$str = $str."\n";
 		}
@@ -34,6 +38,34 @@ class Map {
 			echo "Error : input data not conform, impossible to rotate an object with that...\n";
 			return (1);
 		}
+		for ($i = 0; $i < count($obj->getBox()['x']); $i++) {
+			$cx = $obj->getBox()['x'][$i] + $obj->getCenter_position()['x'];
+			$cy = $obj->getBox()['y'][$i] + $obj->getCenter_position()['y'];
+			$this->_map[$cx][$cy] = 0;
+		}
+		for ($i = 0; $i < count($obj->getBox()['x']); $i++) {
+			$new_box['x'][] = $rot[0][0] * $obj->getBox()['x'][$i] +
+				$rot[0][1] * $obj->getBox()['y'][$i];
+			$new_box['y'][] = $rot[1][0] * $obj->getBox()['x'][$i] +
+				$rot[1][1] * $obj->getBox()['y'][$i];
+		}
+		for ($i = 0; $i < count($new_box['x']); $i++) {
+			$cx = $new_box['x'][$i] + $obj->getCenter_position()['x'];
+			$cy = $new_box['y'][$i] + $obj->getCenter_position()['y'];
+			if ($this->_map[$cx][$cy] !== $obj->getId() &&
+				$this->_map[$cx][$cy] !== 0) {
+				echo "CRAAAAAAAAASSSHHH !!\n";
+				return (1);
+			}
+			$this->_map[$cx][$cy] = $obj->getId();
+		}
+		$obj->setBox($new_box);
+		$cx = $rot[0][0] * $obj->getDirection()['x'] +
+			$rot[0][1] * $obj->getDirection()['y'];
+		$cy = $rot[1][0] * $obj->getDirection()['x'] +
+			$rot[1][1] * $obj->getDirection()['y'];
+		$obj->setDirection($cx, $cy);
+		return (0);
 	}
  
 	public function translate($obj, $dest) {
@@ -41,30 +73,28 @@ class Map {
 			echo "Error : input data not conform, impossible to translate an object with that...\n";
 			return (1);
 		}
-		for ($x = 0; $x < count($obj->getBox()['x']); $x++) {
-			for ($y = 0; $y <  count($obj->getBox()['y']); $y++) {
-				$cx = $obj->getBox()['x'][$x] + $obj->getCenter_position()['x'];
-				$cy = $obj->getBox()['y'][$y] + $obj->getCenter_position()['y'];
-				if ($this->_map[$cx][$cy] == $obj->getId())
-					$this->_map[$cx][$cy] = 0;
-				else if ($this->_map[$cx][$cy] == "$")
+		for ($i = 0; $i < count($obj->getBox()['x']); $i++) {
+			$cx = $obj->getBox()['x'][$i] + $obj->getCenter_position()['x'];
+			$cy = $obj->getBox()['y'][$i] + $obj->getCenter_position()['y'];
+			if ($this->_map[$cx][$cy] === $obj->getId())
+				$this->_map[$cx][$cy] = 0;
+			else if ($this->_map[$cx][$cy] === "$")
+				$this->_map[$cx][$cy] = $obj->getId();
+			$cx = $obj->getBox()['x'][$i] + $dest['x'];
+			$cy = $obj->getBox()['y'][$i] + $dest['y'];
+			if ($this->_map[$cx][$cy] === 0 || $this->_map[$cx][$cy] === $obj->getId()) {
+				if ($this->_map[$cx][$cy] === $obj->getId())
+					$this->_map[$cx][$cy] = "$";
+				else
 					$this->_map[$cx][$cy] = $obj->getId();
-				$cx = $obj->getBox()['x'][$x] + $dest['x'];
-				$cy = $obj->getBox()['y'][$y] + $dest['y'];
-				if ($this->_map[$cx][$cy] == 0 || $this->_map[$cx][$cy] == $obj->getId()) {
-					if ($this->_map[$cx][$cy] == $obj->getId())
-						$this->_map[$cx][$cy] = "$";
-					else
-						$this->_map[$cx][$cy] = $obj->getId();
-					$obj->getCenter_position()['x'] = $dest['x'];
-					$obj->getCenter_position()['y'] = $dest['y'];
-				}
-				else {
-					echo "CRAAASHHHHHHHHHHHHH !!!\n";
-					return (1);
-				}
 			}
-		}
+			else {
+				$obj->setCenter_position($cx, $cy);
+				echo "CRAAASHHHHHHHHHHHHH !!!\n";
+				return (1);
+			}
+	 	}
+		$obj->setCenter_position($dest['x'], $dest['y']);
 		return (0);
 	}
 
@@ -86,8 +116,6 @@ class Map {
 			echo "(Object must be of class Starship to be added to the map)\n";
 			return;
 		}
-		print_r($obj->getBox());
-		print_r($obj->getCenter_position());
 		for ($x = 0; $x < count($obj->getBox()['x']); $x++) {
 			for ($y = 0; $y <  count($obj->getBox()['y']); $y++) {
 				$cx = $obj->getBox()['x'][$x] + $obj->getCenter_position()['x'];
