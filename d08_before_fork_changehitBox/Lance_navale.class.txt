@@ -1,7 +1,0 @@
-Lance navale
-	Charges :				0
-	Portée courte :			1 à 30 cases
-	Portée intermédiaire :	31 à 60 cases
-	Portée longue :			61 à 90 cases
-	Zone d’effet :			Une ligne ou une colone d’une case d’epaisseur
-							qui part de l’avant du vaisseau.

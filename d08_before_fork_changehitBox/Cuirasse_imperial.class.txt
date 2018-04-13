@@ -1,9 +1,0 @@
-Cuirassé Impérial
-	Nom :				"Imperator Deus"
-	Taille :			2x7 cases
-	Points de coque :	8
-	PP :				12
-	Vitesse :			10
-	Manoeuvre :			5
-	Bouclier :			2
-	Arme :				Deux lances navales
