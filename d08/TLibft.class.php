@@ -41,11 +41,11 @@ trait TLibft {
 					$axis = [-1, "y", "x"];
 			}
 			if ($this->sign($move1) === $this->sign($axis[0]) && $move1 !== 0)
-				$deplacement = $move1;
+				$deplacement = abs($move1);
 			else
-				$deplacement = $obj->getAgility() * $axis[0];
-			for ($i = 0; $i < abs($deplacement); $i++) {
-				$trans[$axis[1]] = $obj->getCenter_position()[$axis[1]] + 1 * $this->sign($deplacement);
+				$deplacement = $obj->getAgility();
+			for ($i = 0; $i < $deplacement; $i++) {
+				$trans[$axis[1]] = $obj->getCenter_position()[$axis[1]] + 1 * $axis[0];
 				$trans[$axis[2]] = $obj->getCenter_position()[$axis[2]];
 				if ($map->translate($obj, $trans))
 					return (0);
