@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?PHP
 
-while ($ret = !feof(STDIN))
+while (!feof(STDIN))
 {
 	echo "Entrez un nombre: ";
 	$line = trim(fgets(STDIN));
